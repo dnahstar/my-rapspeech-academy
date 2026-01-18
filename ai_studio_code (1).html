@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow9 | 랩 & 스피치 아카데미</title>
+    <!-- Google Fonts: Montserrat (영문), Noto Sans KR (국문) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 기본 스타일 리셋 --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        li { list-style: none; }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 컬러 변수 --- */
+        :root {
+            --neon-green: #39FF14;
+            --dark-grey: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        /* --- 네비게이션 --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+        }
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--neon-green);
+            letter-spacing: -1px;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links li {
+            margin-left: 30px;
+        }
+        .nav-links a:hover {
+            color: var(--neon-green);
+        }
+
+        /* --- 섹션 공통 스타일 --- */
+        section {
+            padding: 100px 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--white);
+        }
+        .section-title span {
+            color: var(--neon-green);
+        }
+
+        /* --- 메인 히어로 섹션 --- */
+        #home {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=80&w=2070') no-repeat center/cover;
+            text-align: center;
+            align-items: center;
+        }
+        #home h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+        #home p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ccc;
+        }
+        .btn-main {
+            padding: 15px 40px;
+            background-color: var(--neon-green);
+            color: #000;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+        }
+        .btn-main:hover {
+            transform: scale(1.1);
+            background-color: #fff;
+        }
+
+        /* --- 커리큘럼 섹션 --- */
+        #curriculum { background-color: #050505; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: var(--dark-grey);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+        .card:hover {
+            border-color: var(--neon-green);
+            transform: translateY(-10px);
+        }
+        .card h3 {
+            color: var(--neon-green);
+            margin-bottom: 15px;
+        }
+
+        /* --- 강사 소개 섹션 --- */
+        #instructors { background-color: #000; }
+        .instructor-flex {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .ins-profile {
+            text-align: center;
+            max-width: 300px;
+        }
+        .ins-img {
+            width: 200px;
+            height: 200px;
+            background: #333;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid var(--neon-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        /* --- 오시는 길 (지도 영역) --- */
+        #location { background-color: #050505; }
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed var(--neon-green);
+            color: #666;
+        }
+
+        /* --- 상담 신청 섹션 --- */
+        #contact { background-color: #000; }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .form-group { margin-bottom: 20px; }
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            background: #111;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--neon-green);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--neon-green);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* --- 푸터 --- */
+        footer {
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid #222;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* --- 반응형 설정 --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* 심플함을 위해 모바일 메뉴 생략 */
+            #home h1 { font-size: 2.5rem; }
+            section { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 네비게이션 -->
+    <nav>
+        <div class="logo">FLOW9</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#curriculum">Program</a></li>
+            <li><a href="#instructors">Team</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#contact">Apply</a></li>
+        </ul>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section id="home">
+        <h1>BEYOND SPEECH<br><span>FLOW YOUR SOUL</span></h1>
+        <p>랩의 리듬과 스피치의 논리가 만나는 유일한 곳, 플로우나인</p>
+        <a href="#contact" class="btn-main">무료 상담 신청하기</a>
+    </section>
+
+    <!-- 커리큘럼 섹션 -->
+    <section id="curriculum">
+        <h2 class="section-title">OUR <span>CURRICULUM</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>01. Basic Flow</h3>
+                <p>랩의 복식 호흡과 스피치의 정확한 발성을 결합하여 단단한 목소리를 만듭니다.</p>
+            </div>
+            <div class="card">
+                <h3>02. Rhythm Speech</h3>
+                <p>말의 고저장단과 속도를 조절하여 청중을 사로잡는 임팩트를 전수합니다.</p>
+            </div>
+            <div class="card">
+                <h3>03. Lyric Writing</h3>
+                <p>가사 쓰기 기법을 활용해 논리적이면서도 예술적인 대본을 작성합니다.</p>
+            </div>
+            <div class="card">
+                <h3>04. Performance</h3>
+                <p>무대 공포증을 극복하고 제스처와 시선 처리를 통해 자신감을 완성합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 강사 소개 -->
+    <section id="instructors">
+        <h2 class="section-title">INSTRUCTORS</h2>
+        <div class="instructor-flex">
+            <div class="ins-profile">
+                <div class="ins-img">🎤</div>
+                <h3>MC FLOW</h3>
+                <p>25년차 랩퍼이자<br>스피치 커뮤니케이션 전문가</p>
+            </div>
+            <div class="ins-profile">
+                <div class="ins-img">🎧</div>
+                <h3>JAY-P</h3>
+                <p>아나운서 출신<br>퍼포먼스 디렉팅 전문</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 오시는 길 -->
+    <section id="location">
+        <h2 class="section-title">LOCATION</h2>
+        <div class="map-placeholder">
+            [ 지도 API 영역: 세종특별자치시 ... ]
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+            <p>나성동 도보 3분</p>
+            <p>상담 가능 시간: 평일 13:00 - 22:00</p>
+        </div>
+    </section>
+
+    <!-- 상담 신청 -->
+    <section id="contact">
+        <h2 class="section-title">GET IN <span>TOUCH</span></h2>
+        <div class="contact-form">
+            <form>
+                <div class="form-group">
+                    <input type="text" placeholder="이름" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="연락처 (- 제외)" required>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option value="">관심 과정을 선택하세요</option>
+                        <option value="basic">베이직 플로우 (기초)</option>
+                        <option value="business">비즈니스 스피치</option>
+                        <option value="artist">아티스트 입문</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="궁금하신 점을 남겨주세요"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">상담 예약하기</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>&copy; 2023 FLOW9 ACADEMY. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
